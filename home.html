@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Marvel Studio</title>
+    <style>
+        /* Basic Resets & Body Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #0a0a0a; /* Dark background */
+            color: #f0f0f0; /* Light text color */
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            position: relative; /* Needed for absolute positioning of stars, etc. */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+            padding-bottom: 150px; /* Space for fixed navbar/buttons at bottom */
+            box-sizing: border-box;
+            /* Main background with stars */
+            background: #0a0a0a url('https://www.solarsystemscope.com/textures/download/8k_stars_milky_way.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Header Styles */
+        header {
+            background-image: url('https://source.unsplash.com/1600x900/?marvel,superhero'); /* Dynamic background */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden; /* For header specific animations */
+        }
+
+        header::before { /* Overlay for better text readability */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        header h1, header h2 {
+            position: relative;
+            z-index: 2;
+            animation: fadeInScale 1.5s ease-out forwards;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            color: #e60000; /* Marvel red */
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        header h2 {
+            font-size: 1.8em;
+            color: #ccc;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Main Content Sections */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        section {
+            background-color: rgba(17, 17, 17, 0.9);
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        .intro p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .gallery {
+            text-align: center;
+        }
+
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery h2 {
+            color: #e60000;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .gallery h3 {
+            color: #aaa;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .gallery p {
+            font-size: 1em;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        .quotes {
+            text-align: center;
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            align-items: center;
+            gap: 30px;
+        }
+
+        .quotes img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 50%;
+            border: 5px solid #e60000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+            object-fit: cover;
+            aspect-ratio: 1/1; /* Keep circular */
+        }
+
+        .quotes h1 {
+            font-size: 2.5em;
+            color: white;
+            font-style: italic;
+            text-shadow: 1px 1px 5px black;
+            max-width: 800px; /* Limit quote width */
+        }
+
+        .quotes hr {
+            border: none;
+            border-top: 3px dashed rgba(255, 0, 0, 0.5);
+            width: 50%;
+            margin: 30px auto;
+        }
+
+        .quotes .quote-right {
+            align-self: flex-end; /* Pushes the second quote to the right */
+            text-align: right;
+        }
+
+        /* Footer Styles */
+        .footer {
+            text-align: center;
+            background-color: #0f0f0f;
+            padding: 40px 20px;
+            border-top: 2px solid #e60000;
+            margin-bottom: 0; /* Remove bottom margin as it's the last element */
+            transition: background-color 0.5s ease;
+        }
+
+        .footer.alternate { /* For boom blast effect */
+            background-color: #220000;
+            box-shadow: 0 0 30px red;
+        }
+
+        .footer h2 {
+            font-size: 1.5em;
+            color: #e60000;
+            margin-bottom: 10px;
+        }
+
+        .footer h2 a {
+            color: #e60000;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer h2 a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer h3 {
+            font-size: 1.2em;
+            color: #ccc;
+            margin-top: 20px;
+        }
+
+        .footer h4 {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* Interactive Buttons */
+        button {
+            background-color: crimson;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative; /* For animations */
+            overflow: hidden; /* For effects inside button */
+        }
+
+        button:hover {
+            background-color: darkred;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+        }
+
+        /* Button Animations */
+        .animate-pulse {
+            animation: pulse 0.4s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        .animate-rotate {
+            animation: rotateButton 0.4s ease-in-out;
+        }
+
+        @keyframes rotateButton {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Star Background */
+        .star {
+            position: fixed; /* Fixed so they don't scroll with content */
+            background: white;
+            border-radius: 50%;
+            opacity: 0; /* Initially hidden */
+            animation: twinkle 4s infinite ease-in-out forwards; /* Longer twinkle */
+            z-index: -1; /* Behind content */
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Galaxy Effect */
+        .earth-galaxy {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: rgba(100, 100, 255, 0.5);
+            box-shadow: 0 0 100px 50px rgba(100, 100, 255, 0.5);
+            animation: expandGalaxy 0.8s forwards; /* Faster animation */
+            z-index: -1;
+        }
+
+        @keyframes expandGalaxy {
+            0% { width: 0; height: 0; opacity: 0; }
+            50% { width: 150vh; height: 150vh; opacity: 1; }
+            100% { width: 200vh; height: 200vh; opacity: 0; }
+        }
+
+        /* Fireball Effect */
+        .fireball {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, orange 0%, red 70%, transparent 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: launchFireball 0.7s forwards; /* Faster animation */
+            filter: blur(5px);
+            opacity: 0.8;
+            z-index: 99; /* Above content */
+        }
+
+        /* Individual fireball animation */
+        @keyframes launchFireball {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translate(var(--fireball-end-x, 0), var(--fireball-end-y, 0)) scale(1.5); opacity: 0; }
+        }
+
+        /* Boom Blast Effect */
+        .big-boom {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, yellow 0%, red 50%, transparent 100%);
+            border-radius: 50%;
+            animation: boomBlast 0.9s forwards; /* Faster animation */
+            filter: blur(10px);
+            opacity: 0.9;
+            z-index: 98;
+        }
+
+        @keyframes boomBlast {
+            0% { width: 0; height: 0; opacity: 0; }
+            20% { width: 300px; height: 300px; opacity: 1; }
+            100% { width: 1000px; height: 1000px; opacity: 0; }
+        }
+
+        /* Solar System */
+        .solar-system {
+            position: fixed;
+            bottom: 10px; /* Adjust as needed */
+            right: 10px; /* Adjust as needed */
+            width: 250px; /* Increased size for more planets */
+            height: 250px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50; /* Ensure it's above background elements */
+            /* Removed optional orbit visualization here, will add specific orbits */
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            background-size: cover; /* Ensure texture covers */
+            background-position: center; /* Center texture */
+        }
+
+        /* Orbital Paths */
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+        .orbit-mercury { width: 60px; height: 60px; }
+        .orbit-venus { width: 90px; height: 90px; }
+        .orbit-earth { width: 120px; height: 120px; }
+        .orbit-mars { width: 150px; height: 150px; }
+        .orbit-jupiter { width: 200px; height: 200px; }
+        .orbit-saturn { width: 240px; height: 240px; }
+
+
+        .sun {
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            box-shadow: 0 0 20px 5px yellow, 0 0 40px 10px orange;
+            z-index: 5;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Solar_Prominence_from_STEREO.jpg/1200px-Solar_Prominence_from_STEREO.jpg'); /* New Sun texture */
+            animation: rotateSelf 20s linear infinite; /* Sun rotation */
+        }
+
+        /* Planet Styles and Animations */
+        /* Each planet needs a specific texture */
+        .mercury {
+            width: 8px; height: 8px;
+            background-image: url('https://svs.gsfc.nasa.gov/vis/a000000/a004400/a004456/mercury_2k.jpg'); /* New Mercury texture */
+            animation: orbitMercury 8s linear infinite, rotateSelf 5s linear infinite;
+        }
+        @keyframes orbitMercury {
+            0% { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+        }
+
+        .venus {
+            width: 12px; height: 12px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus_Magellan_Clouds.png'); /* New Venus texture */
+            animation: orbitVenus 15s linear infinite, rotateSelf 8s linear infinite;
+        }
+        @keyframes orbitVenus {
+            0% { transform: rotate(0deg) translateX(45px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(45px) rotate(-360deg); }
+        }
+
+        .earth {
+            width: 15px; height: 15px;
+            background-image: url('https://www.nasa.gov/sites/default/files/thumbnails/image/globe_east_2048.jpg'); /* New Earth texture */
+            animation: orbitEarth 25s linear infinite, rotateSelf 10s linear infinite;
+        }
+        @keyframes orbitEarth {
+            0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+        }
+
+        .moon {
+            width: 8px; height: 8px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg'); /* New Moon texture */
+            animation: orbitMoon 3s linear infinite, rotateSelf 2s linear infinite;
+            position: absolute; /* Relative to earth's orbit */
+        }
+        @keyframes orbitMoon {
+            0% { transform: translateX(10px) rotate(0deg); }
+            100% { transform: translateX(10px) rotate(360deg); }
+        }
+
+
+        .mars {
+            width: 12px; height: 12px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1200px-OSIRIS_Mars_true_color.jpg'); /* New Mars texture */
+            animation: orbitMars 35s linear infinite, rotateSelf 12s linear infinite;
+        }
+        @keyframes orbitMars {
+            0% { transform: rotate(0deg) translateX(75px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(75px) rotate(-360deg); }
+        }
+
+        .jupiter {
+            width: 25px; height: 25px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/1200px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg'); /* New Jupiter texture */
+            animation: orbitJupiter 50s linear infinite, rotateSelf 15s linear infinite;
+        }
+        @keyframes orbitJupiter {
+            0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+        }
+
+        .saturn {
+            width: 20px;
+            height: 20px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Saturn_during_Equinox.jpg/1200px-Saturn_during_Equinox.jpg'); /* New Saturn texture */
+            animation: orbitSaturn 65s linear infinite, rotateSelf 18s linear infinite;
+        }
+        @keyframes orbitSaturn {
+            0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+        }
+
+        .saturn-ring {
+            position: absolute;
+            width: 40px; /* Adjust ring size relative to planet */
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(200, 200, 150, 0.6);
+            transform: rotateX(70deg) rotateY(20deg); /* Tilt the ring */
+            box-shadow: 0 0 5px rgba(200, 200, 150, 0.4);
+            pointer-events: none; /* Make sure it doesn't block clicks on the planet */
+            animation: rotateRing 65s linear infinite; /* Match Saturn's orbit */
+        }
+        @keyframes rotateRing {
+            0% { transform: rotate(0deg) translateX(120px) rotateX(70deg) rotateY(20deg) rotateZ(0deg); }
+            100% { transform: rotate(360deg) translateX(120px) rotateX(70deg) rotateY(20deg) rotateZ(360deg); }
+        }
+
+
+        @keyframes rotateSelf {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 0%; }
+        }
+
+
+        /* Space Jet Animation */
+        .space-jet {
+            position: fixed;
+            width: 100px; /* Size of the jet image */
+            height: 50px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Space_shuttle_Atlantis_docking_with_ISS.png/1200px-Space_shuttle_Atlantis_docking_with_ISS.png'); /* New Jet PNG */
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 200; /* Ensure it's on top */
+            display: none; /* Hidden by default - will be triggered by JS */
+            filter: drop-shadow(0 0 10px rgba(0, 200, 255, 0.8)); /* Blue glow for jet */
+        }
+
+        @keyframes flySpaceJet {
+            0% {
+                transform: translate(var(--jet-start-x), var(--jet-start-y)) rotate(var(--jet-start-rotate, 0deg)) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translate(var(--jet-start-x), var(--jet-start-y)) rotate(var(--jet-start-rotate, 0deg)) scale(1);
+            }
+            100% {
+                transform: translate(var(--jet-end-x), var(--jet-end-y)) rotate(var(--jet-end-rotate, 0deg)) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Go to Missions Link */
+        .missions-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px; /* Space above buttons */
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .missions-link:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Back Button Specific Styles - WITH SHIMMER */
+        #backToLoginBtn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #555; /* Darker, less attention-grabbing than main buttons */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            z-index: 1000; /* Ensure it's on top of everything */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            overflow: hidden; /* For the shimmer effect */
+            position: fixed; /* Keep it fixed */
+        }
+
+        #backToLoginBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* Shimmer color */
+            transform: skewX(-20deg);
+            animation: shimmer 1.5s infinite; /* Shimmer animation */
+            animation-delay: 0.5s; /* Delay start slightly */
+        }
+
+        @keyframes shimmer {
+            0% { left: -75%; }
+            100% { left: 100%; }
+        }
+
+        #backToLoginBtn:hover {
+            background-color: #777;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Animated Background for Solar System (Nebula/Galaxy effect) */
+        .galaxy-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(20, 0, 50, 0.5) 0%, transparent 50%),
+                               radial-gradient(circle at 90% 80%, rgba(50, 0, 20, 0.5) 0%, transparent 50%),
+                               radial-gradient(circle at 50% 50%, rgba(0, 30, 60, 0.5) 0%, transparent 70%);
+            animation: subtlePan 60s linear infinite alternate, subtleColorShift 40s linear infinite alternate;
+            z-index: -2; /* Ensure it's behind stars and planets */
+            opacity: 0.6; /* Make it subtle */
+            filter: blur(2px); /* Soften the look */
+        }
+
+        @keyframes subtlePan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        @keyframes subtleColorShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+
+        /* --- RESPONSIVENESS (Media Queries) --- */
+
+        /* Tablets and smaller desktops (max-width: 1024px) */
+        @media (max-width: 1024px) {
+            header h1 {
+                font-size: 2.8em;
+            }
+            header h2 {
+                font-size: 1.5em;
+            }
+            .quotes h1 {
+                font-size: 2em;
+            }
+            .quotes img {
+                max-width: 250px;
+            }
+            .solar-system {
+                width: 200px;
+                height: 200px;
+            }
+            .sun { width: 40px; height: 40px; }
+            .orbit-mercury { width: 50px; height: 50px; }
+            .mercury { animation: orbitMercury 8s linear infinite, rotateSelf 5s linear infinite; }
+            @keyframes orbitMercury {
+                0% { transform: rotate(0deg) translateX(25px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(25px) rotate(-360deg); }
+            }
+            .orbit-venus { width: 75px; height: 75px; }
+            .venus { animation: orbitVenus 15s linear infinite, rotateSelf 8s linear infinite; }
+            @keyframes orbitVenus {
+                0% { transform: rotate(0deg) translateX(37.5px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(37.5px) rotate(-360deg); }
+            }
+            .orbit-earth { width: 100px; height: 100px; }
+            .earth { animation: orbitEarth 25s linear infinite, rotateSelf 10s linear infinite; }
+            @keyframes orbitEarth {
+                0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+            }
+            .orbit-mars { width: 125px; height: 125px; }
+            .mars { animation: orbitMars 35s linear infinite, rotateSelf 12s linear infinite; }
+            @keyframes orbitMars {
+                0% { transform: rotate(0deg) translateX(62.5px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(62.5px) rotate(-360deg); }
+            }
+            .orbit-jupiter { width: 160px; height: 160px; }
+            .jupiter { animation: orbitJupiter 50s linear infinite, rotateSelf 15s linear infinite; }
+            @keyframes orbitJupiter {
+                0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+            }
+            .orbit-saturn { width: 190px; height: 190px; }
+            .saturn { animation: orbitSaturn 65s linear infinite, rotateSelf 18s linear infinite; }
+            @keyframes orbitSaturn {
+                0% { transform: rotate(0deg) translateX(95px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(95px) rotate(-360deg); }
+            }
+            .saturn-ring { width: 32px; height: 32px; animation: rotateRing 65s linear infinite; }
+            @keyframes rotateRing {
+                0% { transform: rotate(0deg) translateX(95px) rotateX(70deg) rotateY(20deg) rotateZ(0deg); }
+                100% { transform: rotate(360deg) translateX(95px) rotateX(70deg) rotateY(20deg) rotateZ(360deg); }
+            }
+        }
+
+        /* Mobile devices (max-width: 768px) */
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 15px;
+            }
+            header h1 {
+                font-size: 2.2em;
+            }
+            header h2 {
+                font-size: 1.3em;
+            }
+            main {
+                padding: 15px;
+            }
+            section {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+            .gallery h2 {
+                font-size: 1.8em;
+            }
+            .gallery h3 {
+                font-size: 1.1em;
+            }
+            .quotes {
+                flex-direction: column; /* Stack images and quotes */
+                gap: 20px;
+            }
+            .quotes h1 {
+                font-size: 1.8em;
+                text-align: center; /* Center quotes on mobile */
+                width: 100%; /* Take full width */
+            }
+            .quotes .quote-right {
+                align-self: center; /* Center the second quote too */
+                text-align: center;
+            }
+            .quotes img {
+                max-width: 200px;
+            }
+            .footer h2, .footer h3 {
+                font-size: 1.3em;
+            }
+            .footer h4 {
+                font-size: 0.8em;
+            }
+
+            /* Buttons */
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+                margin: 8px;
+                width: calc(50% - 16px); /* Two buttons per row */
+                box-sizing: border-box; /* Include padding and border in width */
+            }
+            /* To make them stack correctly within the div */
+            div[style="text-align: center; margin-bottom: 20px;"] {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px; /* Adjust gap between buttons */
+            }
+
+            #backToLoginBtn {
+                bottom: 10px;
+                left: 10px;
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+
+
+            .solar-system {
+                width: 150px;
+                height: 150px;
+                bottom: 5px;
+                right: 5px;
+            }
+            .sun { width: 30px; height: 30px; }
+            .orbit-mercury { width: 40px; height: 40px; }
+            .mercury { animation: orbitMercury 8s linear infinite, rotateSelf 5s linear infinite; }
+            @keyframes orbitMercury {
+                0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+            }
+            .orbit-venus { width: 60px; height: 60px; }
+            .venus { animation: orbitVenus 15s linear infinite, rotateSelf 8s linear infinite; }
+            @keyframes orbitVenus {
+                0% { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+            }
+            .orbit-earth { width: 80px; height: 80px; }
+            .earth { animation: orbitEarth 25s linear infinite, rotateSelf 10s linear infinite; }
+            @keyframes orbitEarth {
+                0% { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+            }
+            .moon { width: 6px; height: 6px; }
+            @keyframes orbitMoon {
+                0% { transform: translateX(8px) rotate(0deg); }
+                100% { transform: translateX(8px) rotate(360deg); }
+            }
+            .orbit-mars { width: 100px; height: 100px; }
+            .mars { animation: orbitMars 35s linear infinite, rotateSelf 12s linear infinite; }
+            @keyframes orbitMars {
+                0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+            }
+            .orbit-jupiter { width: 120px; height: 120px; }
+            .jupiter { animation: orbitJupiter 50s linear infinite, rotateSelf 15s linear infinite; }
+            @keyframes orbitJupiter {
+                0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+            }
+            .orbit-saturn { width: 140px; height: 140px; }
+            .saturn { animation: orbitSaturn 65s linear infinite, rotateSelf 18s linear infinite; }
+            @keyframes orbitSaturn {
+                0% { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+            }
+            .saturn-ring { width: 28px; height: 28px; animation: rotateRing 65s linear infinite; }
+            @keyframes rotateRing {
+                0% { transform: rotate(0deg) translateX(70px) rotateX(70deg) rotateY(20deg) rotateZ(0deg); }
+                100% { transform: rotate(360deg) translateX(70px) rotateX(70deg) rotateY(20deg) rotateZ(360deg); }
+            }
+
+            .missions-link {
+                width: calc(100% - 40px);
+                font-size: 1em;
+                padding: 12px 20px;
+            }
+        }
+
+        /* Smaller mobile devices (max-width: 480px) */
+        @media (max-width: 480px) {
+            header {
+                padding: 50px 10px;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            header h2 {
+                font-size: 1em;
+            }
+            section {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
+            .gallery h2 {
+                font-size: 1.5em;
+            }
+            .gallery h3 {
+                font-size: 1em;
+            }
+            .quotes h1 {
+                font-size: 1.5em;
+            }
+            .quotes img {
+                max-width: 150px;
+            }
+            .footer h2, .footer h3 {
+                font-size: 1.1em;
+            }
+            .footer h4 {
+                font-size: 0.7em;
+            }
+            button {
+                width: calc(100% - 20px); /* Stack buttons fully */
+                margin: 5px 0;
+            }
+            #backToLoginBtn {
+                bottom: 5px;
+                left: 5px;
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+            .solar-system {
+                width: 100px;
+                height: 100px;
+            }
+            .sun { width: 25px; height: 25px; }
+            .orbit-mercury { width: 30px; height: 30px; }
+            .mercury { animation: orbitMercury 8s linear infinite, rotateSelf 5s linear infinite; }
+            @keyframes orbitMercury {
+                0% { transform: rotate(0deg) translateX(15px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(15px) rotate(-360deg); }
+            }
+            .orbit-venus { width: 45px; height: 45px; }
+            .venus { animation: orbitVenus 15s linear infinite, rotateSelf 8s linear infinite; }
+            @keyframes orbitVenus {
+                0% { transform: rotate(0deg) translateX(22.5px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(22.5px) rotate(-360deg); }
+            }
+            .orbit-earth { width: 60px; height: 60px; }
+            .earth { animation: orbitEarth 25s linear infinite, rotateSelf 10s linear infinite; }
+            @keyframes orbitEarth {
+                0% { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="galaxy-background"></div> <!-- Subtle animated background -->
+    <header>
+        <h1>MARVEL STUDIO</h1>
+        <h2>UNIVERSE OF HEROES</h2>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Welcome to the Marvel Universe!</h2>
+            <p>
+                Dive deep into the extraordinary world of Marvel, where superheroes rise, epic battles unfold, and the fate of the universe hangs in the balance. From the Avengers to the Guardians of the Galaxy, explore the stories of courage, sacrifice, and the relentless fight against evil.
+            </p>
+            <p>
+                Discover the origins of your favorite characters, relive iconic moments, and stay updated on the latest releases and events. The Marvel Studio is your gateway to an unparalleled cinematic and comic book experience.
+            </p>
+        </section>
+
+        <section class="gallery">
+            <h2>Iconic Moments & Characters</h2>
+            <img src="iconic.jpg" width="300" height="200" />
+
+            <h3>The Avengers: Earth's Mightiest Heroes</h3>
+            <p>
+                Witness the assembling of Earth's greatest protectors as they stand united against cosmic threats. Each hero brings a unique power and perspective to the fight for justice.
+            </p>
+
+            <img src="uronman5.jpg" width="300" height="200" />
+            <h3>Iron Man: The Genius, Billionaire, Playboy, Philanthropist</h3>
+            <p>
+                Follow the journey of Tony Stark, a brilliant inventor who becomes a armored hero. His technological prowess and sharp wit are unmatched, but his personal demons often challenge his heroic path.
+            </p>
+
+            <img src="shield.jpg"/>
+            <h3>Captain America: The First Avenger</h3>
+            <p>
+                Explore the legend of Steve Rogers, a man transformed into a super-soldier, embodying the ideals of liberty and justice. His unwavering moral compass guides him through the darkest times.
+            </p>
+
+            <!-- Blank image added here -->
+            <img src="ironman7.jpg" width="500" height="400" />
+            <h3>Your Next Adventure Awaits!</h3>
+            <p>
+                This space is reserved for new heroes, untold stories, and exciting revelations from the Marvel Universe. Stay tuned for updates!
+            </p>
+        </section>
+
+        <section class="quotes">
+            <h2>Words to Live By</h2>
+            <div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Stan_Lee_by_Gage_Skidmore_3.jpg/1200px-Stan_Lee_by_Gage_Skidmore_3.jpg" alt="Stan Lee" />
+                <h1>"Excelsior!"</h1>
+                <h3>- Stan Lee</h3>
+            </div>
+            <hr />
+            <div class="quote-right">
+                <img src="ironman4.jpg" />
+                <h1>"I can do this all day."</h1>
+                <h3>- Captain America</h3>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section class="events">
+            <h2>Upcoming Marvel Events</h2>
+            <p>Stay tuned for exciting new movie releases, series announcements, and comic book crossovers!</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="summonStars" class="action-button">Unleash Galaxy!</button>
+                <button id="fireballBlast" class="action-button">💥 Launch Fireball!</button>
+                <button id="boomButton" class="action-button">Activate Boom!</button>
+                <button id="spaceJet" class="action-button">🚀 Deploy Jet!</button>
+            </div>
+        </section>
+
+        <a href="#" class="missions-link" onclick="alert('Preparing for your next mission!'); return false;">Go to Missions</a>
+    </main>
+
+    <footer class="footer">
+        <h2>Join the Marvel Fan Club!</h2>
+        <h3>&copy; 2025 Marvel Studio. All rights reserved.</h3>
+        <h4>Developed by VimalRaj</h4>
+    </footer>
+
+    <!-- Back to Login Button with new ID and Shimmer -->
+    <button id="backToLoginBtn">Back to Login</button>
+
+    <!-- Space Jet Element (initially hidden) -->
+    <div class="space-jet" id="jet"></div>
+
+    <!-- Solar System (already included in previous code, keeping its structure) -->
+    <div class="solar-system">
+        <!-- Orbital Paths -->
+        <div class="orbit orbit-mercury"></div>
+        <div class="orbit orbit-venus"></div>
+        <div class="orbit orbit-earth"></div>
+        <div class="orbit orbit-mars"></div>
+        <div class="orbit orbit-jupiter"></div>
+        <div class="orbit orbit-saturn"></div>
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Solar_Prominence_from_STEREO.jpg/1200px-Solar_Prominence_from_Sun.jpg" class="planet sun">
+        <img src="https://svs.gsfc.nasa.gov/vis/a000000/a004400/a004456/mercury_2k.jpg" class="planet mercury">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus_Magellan_Clouds.png" class="planet venus">
+        <img src="https://www.nasa.gov/sites/default/files/thumbnails/image/globe_east_2048.jpg" class="planet earth">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg" class="planet moon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1200px-OSIRIS_Mars_true_color.jpg" class="planet mars">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/1200px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg" class="planet jupiter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Saturn_during_Equinox.jpg/1200px-Saturn_during_Equinox.jpg" class="planet saturn">
+        <div class="saturn-ring"></div> <!-- Saturn's Ring -->
+    </div>
+
+    <script>
+        // Initial Star Field
+        function createStars(count) {
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = Math.random() * 100 + 'vh'; // Use vh for full viewport
+                star.style.left = Math.random() * 100 + 'vw'; // Use vw for full viewport
+                star.style.width = star.style.height = Math.random() * 2 + 'px'; // Smaller initial stars
+                star.style.animationDelay = Math.random() * 4 + 's'; // Stagger twinkle
+                document.body.appendChild(star);
+            }
+        }
+
+        // Reusable button animation
+        function animateButton(btn, className) {
+            btn.classList.add(className);
+            setTimeout(() => btn.classList.remove(className), 400);
+        }
+
+        // Galaxy Summon Button
+        document.getElementById('summonStars').onclick = function () {
+            animateButton(this, 'animate-pulse');
+            // Add more stars dynamically
+            createStars(50);
+
+            const galaxy = document.createElement('div');
+            galaxy.className = 'earth-galaxy';
+            document.body.appendChild(galaxy);
+            setTimeout(() => galaxy.remove(), 800); /* Matched new faster animation */
+        };
+
+        // Fireball Launch Button - NOW MULTIPLE FIREBALLS!
+        document.getElementById('fireballBlast').addEventListener('click', function (e) {
+            animateButton(this, 'animate-shake');
+            const buttonRect = e.target.getBoundingClientRect();
+            const numFireballs = 5; // Number of fireballs to launch
+
+            for (let i = 0; i < numFireballs; i++) {
+                const fireball = document.createElement('div');
+                fireball.className = 'fireball';
+
+                // Randomize starting position slightly around the button
+                const startX = buttonRect.left + buttonRect.width / 2 + (Math.random() - 0.5) * 50;
+                const startY = buttonRect.top + buttonRect.height / 2 + (Math.random() - 0.5) * 50;
+
+                // Randomize end position across the screen
+                const endX = Math.random() * window.innerWidth * 1.5 - (window.innerWidth * 0.25); // Go beyond edges
+                const endY = Math.random() * window.innerHeight * 1.5 - (window.innerHeight * 0.25);
+
+                fireball.style.left = `${startX}px`;
+                fireball.style.top = `${startY}px`;
+                fireball.style.setProperty('--fireball-end-x', `${endX - startX}px`);
+                fireball.style.setProperty('--fireball-end-y', `${endY - startY}px`);
+                fireball.style.animationDelay = `${i * 0.1}s`; // Stagger the launch
+
+                document.body.appendChild(fireball);
+                setTimeout(() => fireball.remove(), 700 + i * 100); // Remove after animation + stagger
+            }
+        });
+
+        // Boom Button
+        document.getElementById('boomButton').addEventListener('click', function () {
+            animateButton(this, 'animate-rotate');
+            const blast = document.createElement('div');
+            blast.className = 'big-boom';
+            document.body.appendChild(blast);
+            setTimeout(() => blast.remove(), 900); /* Matched new faster animation */
+
+            // Toggle footer background
+            document.querySelector('.footer').classList.toggle('alternate');
+            setTimeout(() => {
+                document.querySelector('.footer').classList.remove('alternate');
+            }, 1000); // Remove alternate class after a short delay
+        });
+
+        // Space Jet Button - NOW DYNAMIC FLIGHT PATH!
+        document.getElementById('spaceJet').addEventListener('click', function() {
+            animateButton(this, 'animate-pulse');
+            const jet = document.getElementById('jet');
+
+            // Randomize start and end points for a dynamic flight
+            const startSide = Math.floor(Math.random() * 4); // 0:top, 1:right, 2:bottom, 3:left
+            let startX, startY, endX, endY, startRotate, endRotate;
+
+            switch(startSide) {
+                case 0: // From top
+                    startX = Math.random() * window.innerWidth;
+                    startY = -100;
+                    endX = Math.random() * window.innerWidth;
+                    endY = window.innerHeight + 100;
+                    startRotate = Math.random() * 90 - 45; // Slight angle
+                    endRotate = Math.random() * 90 - 45 + 180; // Opposite slight angle
+                    break;
+                case 1: // From right
+                    startX = window.innerWidth + 100;
+                    startY = Math.random() * window.innerHeight;
+                    endX = -100;
+                    endY = Math.random() * window.innerHeight;
+                    startRotate = Math.random() * 90 + 90 - 45;
+                    endRotate = Math.random() * 90 + 90 - 45 + 180;
+                    break;
+                case 2: // From bottom
+                    startX = Math.random() * window.innerWidth;
+                    startY = window.innerHeight + 100;
+                    endX = Math.random() * window.innerWidth;
+                    endY = -100;
+                    startRotate = Math.random() * 90 + 180 - 45;
+                    endRotate = Math.random() * 90 + 180 - 45 + 180;
+                    break;
+                case 3: // From left
+                    startX = -100;
+                    startY = Math.random() * window.innerHeight;
+                    endX = window.innerWidth + 100;
+                    endY = Math.random() * window.innerHeight;
+                    startRotate = Math.random() * 90 + 270 - 45;
+                    endRotate = Math.random() * 90 + 270 - 45 + 180;
+                    break;
+            }
+
+            jet.style.left = `${startX}px`;
+            jet.style.top = `${startY}px`;
+            jet.style.setProperty('--jet-start-x', `${startX}px`);
+            jet.style.setProperty('--jet-start-y', `${startY}px`);
+            jet.style.setProperty('--jet-end-x', `${endX}px`);
+            jet.style.setProperty('--jet-end-y', `${endY}px`);
+            jet.style.setProperty('--jet-start-rotate', `${startRotate}deg`);
+            jet.style.setProperty('--jet-end-rotate', `${endRotate}deg`);
+
+            jet.style.display = 'block'; // Show the jet
+            jet.style.animation = 'none'; // Reset animation to re-trigger
+            void jet.offsetWidth; // Trigger reflow to reset animation
+            jet.style.animation = `flySpaceJet 2s linear forwards`; // Re-apply animation
+
+            setTimeout(() => {
+                jet.style.display = 'none'; // Hide jet after animation
+            }, 2000); // Match animation duration
+        });
+
+        // Back to Login Button Functionality
+        document.getElementById('backToLoginBtn').addEventListener('click', function() {
+            window.location.href = 'index.html'; // Navigate to index.html
+        });
+
+        // Key Events for fun (keeping existing functionality)
+        document.addEventListener('keydown', function (e) {
+            if (e.key.toLowerCase() === 'y') {
+                // Trigger multiple fireballs from a random central point
+                const numFireballs = 3;
+                for (let i = 0; i < numFireballs; i++) {
+                    const fireball = document.createElement('div');
+                    fireball.className = 'fireball';
+                    const startX = window.innerWidth / 2 + (Math.random() - 0.5) * 100;
+                    const startY = window.innerHeight / 2 + (Math.random() - 0.5) * 100;
+                    const endX = Math.random() * window.innerWidth * 1.5 - (window.innerWidth * 0.25);
+                    const endY = Math.random() * window.innerHeight * 1.5 - (window.innerHeight * 0.25);
+
+                    fireball.style.left = `${startX}px`;
+                    fireball.style.top = `${startY}px`;
+                    fireball.style.setProperty('--fireball-end-x', `${endX - startX}px`);
+                    fireball.style.setProperty('--fireball-end-y', `${endY - startY}px`);
+                    fireball.style.animationDelay = `${i * 0.05}s`;
+
+                    document.body.appendChild(fireball);
+                    setTimeout(() => fireball.remove(), 700 + i * 50);
+                }
+            } else if (e.key.toLowerCase() === 'x') {
+                const blast = document.createElement('div');
+                blast.className = 'big-boom';
+                document.body.appendChild(blast);
+                setTimeout(() => blast.remove(), 900);
+            }
+        });
+
+        // Call functions on page load
+        window.onload = function() {
+            createStars(100); // Create 100 stars
+        };
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Home Base</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-effects">
+        <div class="smoke-layer smoke-1"></div>
+        <div class="smoke-layer smoke-2"></div>
+        <div class="fire-glow fire-glow-1"></div>
+        <div class="fire-glow fire-glow-2"></div>
+    </div>
+    <div class="lightning-container">
+        <div class="lightning-bolt bolt-1"></div>
+        <div class="lightning-bolt bolt-2"></div>
+        <div class="lightning-bolt bolt-3"></div>
+        <div class="lightning-bolt bolt-4"></div>
+        <div class="lightning-bolt bolt-5"></div>
+    </div>
+    <div class="page-overlay"></div> 
+    <header class="home-header">
+        <h1>AVENGERS INITIATIVE</h1>
+        <h2>WELCOME, AGENT</h2>
+    </header>
+
+    <main class="home-main">
+        <div class="central-display">
+            <img src="logo.webp" alt="Avengers Logo" class="avengers-logo">
+            <p>Your access to classified operations has been granted. Prepare for your next assignment.</p>
+            
+            <a href="missions.html" class="mission-link-button">ACCESS MISSION BRIEFINGS</a>
+        </div>
+    </main>
+
+    <footer class="home-footer">
+        <p>&copy; 2025 MARVEL / S.H.I.E.L.D. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+.bg-image-1 {
+    /* ... */
+    background-image: url('https://placehold.co/1920x1080/000000/F0F0F0?text=YOUR+FIRST+BACKGROUND+IMAGE'); /* <-- Replace this URL */
+    /* ... */
+}
+
+.bg-image-2 {
+    /* ... */
+    background-image: url('https://placehold.co/1920x1080/000000/F0F0F0?text=YOUR+SECOND+BACKGROUND+IMAGE'); /* <-- Replace this URL */
+    /* ... */
+}
+.front-image-1 {
+    /* ... */
+    background-image: url('https://placehold.co/300x300/e50000/F0F0F0?text=YOUR+FRONT+IMAGE+1'); /* <-- Replace this URL */
+    /* ... */
+}
+
+.front-image-2 {
+    /* ... */
+    background-image: url('https://placehold.co/300x300/a6a6a6/000000?text=YOUR+FRONT+IMAGE+2'); /* <-- Replace this URL */
+    /* ... */
+}

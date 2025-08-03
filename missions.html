@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marvel Shop</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <img src="images/marvel-logo.png" alt="Marvel Logo" class="logo">
+    <h1>Marvel Gear Store</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Shop</a>
+      <a href="#" id="cart-link">🛒 <span id="cart-count">0</span></a>
+    </nav>
+  </header>
+
+  <main class="product-grid">
+
+    <div class="product-card">
+      <img src="images/ironman.jpg" alt="Iron Man Suit">
+      <h3>Iron Man Mark 50</h3>
+      <p class="price">$999</p>
+      <p class="desc">Advanced nano-tech suit from Infinity War.</p>
+      <button class="btn add-btn">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="hulk.jpg" alt="Captain America Shield">
+      <h3>Captain America's Shield</h3>
+      <p class="price">$499</p>
+      <p class="desc">Forged in Wakanda. Fully vibranium.</p>
+      <button class="btn add-btn">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/mjolnir.jpg" alt="Thor Hammer">
+      <h3>Thors Mjölnir</h3>
+      <p class="price">$599</p>
+      <p class="desc">Only the worthy may lift it.</p>
+      <button class="btn add-btn">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/arc.jpg" alt="Arc Reactor">
+      <h3>Arc Reactor</h3>
+      <p class="price">$299</p>
+      <p class="desc">Clean power. Glow like Iron Man.</p>
+      <button class="btn add-btn">Add to Cart</button>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Marvel Shop. Powered by Stark Industries™</p>
+  </footer>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartCount = document.getElementById("cart-count");
+
+    function updateCartCount() {
+      cartCount.textContent = cart.length;
+    }
+
+    document.querySelectorAll(".add-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".product-card");
+        const title = card.querySelector("h3").innerText;
+        const price = card.querySelector(".price").innerText;
+        const img = card.querySelector("img").getAttribute("src");
+
+        const item = { title, price, img };
+        cart.push(item);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+      });
+    });
+
+    document.getElementById("cart-link").addEventListener("click", () => {
+      window.location.href = "troly.html";
+    });
+
+    updateCartCount();
+  </script>
+
+</body>
+</html>
