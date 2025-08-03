@@ -1,17 +1,24 @@
 /* --- CSS Variables --- */
 :root {
-    /* Colors */
+    /* Main Theme Colors */
     --primary-red: #ff004f;
     --dark-red: #8b0000;
     --secondary-orange: #ff8c00;
-    --white: #fff;
-    --black: #000;
-    --text-color: var(--white);
     --cyan: #00ffff;
     --dark-cyan: #001f3f;
     --purple: #8e2de2;
     --dark-purple: #4a00e0;
+    
+    /* Text & Background Colors */
+    --white: #fff;
+    --black: #000;
+    --text-color: var(--white);
+    --primary-text-color: var(--white);
+    
+    /* Accent & Hover Colors */
     --yellow-hover: #ffcc00;
+    --accent-color-blue: #00c6ff;
+    --accent-color-red: var(--primary-red);
 
     /* Box Shadows & Opacities */
     --header-shadow: rgba(255, 0, 0, 0.5);
@@ -41,18 +48,19 @@
 
 /* --- Base Styles --- */
 body {
-    background-color: var(--black);
+    background: var(--black) url('https://www.solarsystemscope.com/textures/download/8k_stars_milky_way.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
-    /* Main background with stars */
-    background: var(--black) url('https://www.solarsystemscope.com/textures/download/8k_stars_milky_way.jpg') no-repeat center center fixed;
-    background-size: cover;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    overflow-y: auto;   /* Allow vertical scroll */
-    position: relative; /* Needed for child absolute/fixed positioning */
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -60,6 +68,8 @@ header {
     background: linear-gradient(135deg, var(--primary-red), var(--dark-red), var(--secondary-orange));
     font-size: 24px;
     box-shadow: 0px 4px 15px var(--header-shadow);
+    position: relative;
+    z-index: 10;
 }
 
 h1, h2, h3 {
@@ -77,6 +87,8 @@ h1, h2, h3 {
     border-radius: 12px;
     box-shadow: 0px 0px 10px var(--box-shadow-base);
     transition: transform var(--transition-speed-normal) ease, box-shadow var(--transition-speed-normal) ease;
+    position: relative;
+    z-index: 2;
 }
 
 .intro:hover, .gallery:hover, .quotes:hover, .footer:hover {
@@ -84,7 +96,20 @@ h1, h2, h3 {
     box-shadow: 0px 0px 25px var(--box-shadow-hover);
 }
 
-/* --- Image & Link Styling --- */
+.quote-right {
+    text-align: right;
+    padding-right: 20px;
+    font-style: italic;
+}
+
+.footer.alternate {
+    background: linear-gradient(135deg, var(--cyan), var(--dark-cyan));
+    color: var(--white);
+    box-shadow: 0px 0px 25px rgba(0, 255, 255, 0.6);
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* --- Image, Link & Divider Styling --- */
 img {
     max-width: 100%;
     border-radius: 12px;
@@ -97,16 +122,10 @@ img:hover {
     transform: scale(1.05);
 }
 
-.quote-right {
-    text-align: right;
-    padding-right: 20px;
-    font-style: italic;
-}
-
 a {
-    color: var(--primary-red); /* Using variable */
+    color: var(--primary-red);
     text-decoration: none;
-    transition: var(--transition-speed-normal);
+    transition: color var(--transition-speed-normal), text-shadow var(--transition-speed-normal);
 }
 
 a:hover {
@@ -115,57 +134,66 @@ a:hover {
 }
 
 hr {
-    border: 1px solid var(--primary-red); /* Using variable */
+    border: 1px solid var(--primary-red);
     width: 80%;
     margin: 20px auto;
 }
 
-/* --- Special Footer Theme --- */
-.footer.alternate {
-    background: linear-gradient(135deg, var(--cyan), var(--dark-cyan));
-    color: var(--white);
-    box-shadow: 0px 0px 25px rgba(0, 255, 255, 0.6);
-    transition: background 0.5s ease, color 0.5s ease;
-}
-
 /* --- Button Styles --- */
-.action-button {
+.action-button, .space-jet-btn, .mission-link-button {
     padding: 12px 30px;
-    background: linear-gradient(45deg, var(--primary-red), var(--secondary-orange));
-    color: var(--white);
     border: none;
     border-radius: 8px;
     font-size: 18px;
-    box-shadow: 0 0 20px var(--button-shadow-red);
     cursor: pointer;
     transition: transform var(--transition-speed-normal) ease, box-shadow var(--transition-speed-normal) ease;
     margin: 10px;
     display: inline-block;
+    color: var(--white);
 }
 
-.action-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px var(--button-shadow-white);
+.action-button {
+    background: linear-gradient(45deg, var(--primary-red), var(--secondary-orange));
+    box-shadow: 0 0 20px var(--button-shadow-red);
 }
 
 .space-jet-btn {
-    padding: 12px 30px;
-    background: linear-gradient(45deg, #00c6ff, #0072ff); /* Specific blue gradient */
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
     box-shadow: 0 0 20px var(--button-shadow-blue);
-    cursor: pointer;
-    transition: transform var(--transition-speed-normal) ease, box-shadow var(--transition-speed-normal) ease;
-    margin-top: 20px;
 }
 
-.space-jet-btn:hover {
+.mission-link-button {
+    background: linear-gradient(45deg, var(--accent-color-red), #ff6600);
+    box-shadow: 0 0 15px var(--accent-color-red);
+    font-family: 'Audiowide', cursive;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-link-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-30deg);
+    transition: all 0.4s ease;
+}
+
+.mission-link-button:hover::before {
+    left: 100%;
+}
+
+.action-button:hover, .space-jet-btn:hover, .mission-link-button:hover {
     transform: scale(1.05);
     box-shadow: 0 0 40px var(--button-shadow-white);
 }
 
+/* Specific buttons with unique styles */
 #boomButton {
     background-color: crimson;
     color: var(--white);
@@ -182,7 +210,7 @@ hr {
     transform: scale(1.1);
 }
 
-.boom-blast { /* This also looks like a button style */
+.boom-blast {
     background: linear-gradient(135deg, var(--purple), var(--dark-purple));
     color: var(--white);
     font-size: 1.2rem;
@@ -208,15 +236,15 @@ hr {
 
 /* --- Background Star Animation --- */
 .star {
-    position: fixed; /* Stays in place relative to viewport */
+    position: fixed;
     width: 2px;
     height: 2px;
     background: var(--white);
     border-radius: 50%;
     opacity: 0.8;
     animation: twinkle var(--star-twinkle-duration) infinite ease-in-out;
-    z-index: -1; /* Pushes stars behind content */
-    pointer-events: none; /* Allows clicks to pass through */
+    z-index: -1;
+    pointer-events: none;
 }
 
 @keyframes twinkle {
@@ -224,41 +252,13 @@ hr {
     50% { opacity: 1; transform: scale(1.5); }
 }
 
-/* --- Click/Interactive Animations (CSS Classes for JS Trigger) --- */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-@keyframes rotatePop {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(15deg) scale(1.2); }
-    100% { transform: rotate(0deg) scale(1); }
-}
-
-.animate-pulse { animation: pulse 0.4s ease; }
-.animate-shake { animation: shake 0.4s ease; }
-/* .animate-rotatePop { animation: rotatePop 0.4s ease; } - commented as it was in original but not in main example */
-
-
 /* --- Dynamic Visual Effects (Likely Triggered by JavaScript) --- */
-
-/* Fireball/Explosion Effects */
 .fireball {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 150px; /* Adjusted to original specific value */
-    height: 150px; /* Adjusted to original specific value */
+    width: 150px;
+    height: 150px;
     background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,140,0,0.2) 70%);
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -267,23 +267,7 @@ hr {
     z-index: 1;
 }
 
-@keyframes explode { /* Using 'explode' as it was first defined */
-    0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(2);
-        opacity: 0.8;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(3);
-        opacity: 0;
-    }
-}
-
-.big-boom { /* Consolidated from .big-blast */
+.big-boom {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -297,6 +281,13 @@ hr {
     animation: mushroomBlast 2s ease-out forwards;
 }
 
+/* Fireball and Mushroom Explosion Animations */
+@keyframes explode {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 30px rgba(255, 255, 255, 0.6); }
+    50% { transform: translate(-50%, -50%) scale(2); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
+
 @keyframes mushroomBlast {
     0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
     40% { transform: scale(2); opacity: 0.8; }
@@ -304,53 +295,16 @@ hr {
     100% { transform: scale(7); opacity: 0; }
 }
 
-.cross-fire {
-    position: fixed; /* Assuming fixed for screen-wide movement */
-    top: -100px; /* Start off-screen */
-    left: -100px;
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, rgba(255,140,0,0.9), transparent);
-    border-radius: 50%;
-    z-index: 99;
-    pointer-events: none;
-    /* You need to define @keyframes crossFireMove */
-    /* animation: crossFireMove 1.2s ease-out forwards; */
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-    opacity: 0.8;
-}
-
-.launch-fire-effect {
-    position: fixed;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, orange, red, transparent);
-    border-radius: 50%;
-    opacity: 0.9;
-    animation: launchFire 1s ease-out forwards;
-    pointer-events: none;
-    z-index: 99;
-}
-
-@keyframes launchFire {
-    0% { transform: translateY(0px) scale(1); opacity: 1; }
-    50% { transform: translateY(-150px) scale(2); opacity: 0.6; }
-    100% { transform: translateY(-300px) scale(0.5); opacity: 0; }
-}
-
+/* Galaxy & Rocket Effects */
 .earth-galaxy {
     position: fixed;
     top: 50%;
     left: 50%;
     width: 250px;
     height: 250px;
-    background: radial-gradient(circle at center,
-        rgba(0, 255, 128, 0.9) 0%,
-        rgba(0, 200, 255, 0.5) 40%,
-        rgba(0, 0, 0, 0) 80%);
+    background: radial-gradient(circle at center, rgba(0, 255, 128, 0.9) 0%, rgba(0, 200, 255, 0.5) 40%, rgba(0, 0, 0, 0) 80%);
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0.8);
-    opacity: 1;
     animation: galaxyBurst var(--galaxy-burst-duration) ease-out forwards;
     z-index: 999;
     pointer-events: none;
@@ -363,77 +317,9 @@ hr {
     100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
 }
 
-/* Solar System Animation (Background) */
-.solar-system {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100vw;
-    height: 100vh;
-    z-index: -10; /* Ensures it's behind everything */
-    pointer-events: none;
-}
-
-.planet {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    opacity: 0.9;
-    animation: spinPlanet 60s linear infinite;
-}
-
-/* Individual Planet Positioning + Orbit Animation */
-.sun {
-    width: 150px;
-    height: 150px;
-    top: 40%;
-    left: 45%;
-    animation: none; /* Sun doesn't orbit */
-}
-
-.earth { animation: orbitEarth 40s linear infinite; }
-.moon { animation: orbitMoon 25s linear infinite; }
-.mars { animation: orbitMars 50s linear infinite; }
-.jupiter { animation: orbitJupiter 65s linear infinite; }
-.saturn { animation: orbitSaturn 80s linear infinite; }
-
-@keyframes spinPlanet {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes orbitEarth {
-    0% { transform: rotate(0deg) translateX(200px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
-}
-
-@keyframes orbitMoon {
-    0% { transform: rotate(0deg) translateX(280px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(280px) rotate(-360deg); }
-}
-
-@keyframes orbitMars {
-    0% { transform: rotate(0deg) translateX(350px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(350px) rotate(-360deg); }
-}
-
-@keyframes orbitJupiter {
-    0% { transform: rotate(0deg) translateX(450px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(450px) rotate(-360deg); }
-}
-
-@keyframes orbitSaturn {
-    0% { transform: rotate(0deg) translateX(550px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(550px) rotate(-360deg); }
-}
-
-/* Rocket Launch Sequence */
 .rocket {
     position: fixed;
-    bottom: -100px; /* Start off-screen */
+    bottom: -100px;
     left: 50%;
     width: 60px;
     height: 100px;
@@ -472,44 +358,22 @@ hr {
     100% { transform: scale(2); opacity: 0; }
 }
 
-/* --- Responsive Design --- */
-@media screen and (max-width: 768px) {
-    .intro, .gallery, .quotes, .footer {
-        width: 90%;
-        padding: 15px;
-    }
-
-    header {
-        font-size: 20px;
-        padding: 20px;
-    }
-
-    img {
-        height: auto;
-    }
-
-    h1, h2, h3 {
-        font-size: 90%; /* Consider using rem or vw for more flexible scaling */
-    }
-}
-/* --- Add these styles to your existing style.css file --- */
-
-/* Home Page Header */
+/* --- Home Page Specific Styles (Avengers Theme) --- */
 .home-header {
     text-align: center;
     padding: 40px 20px 20px;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0 0 10px var(--accent-color-blue)); /* Reusing defined variables */
+    filter: drop-shadow(0 0 10px var(--accent-color-blue));
 }
 
 .home-header h1 {
     font-family: 'Audiowide', cursive;
-    font-size: 4em; /* Larger for a grand welcome */
+    font-size: 4em;
     color: var(--accent-color-blue);
     text-shadow: 0 0 20px var(--accent-color-blue), 0 0 35px var(--accent-color-blue);
     margin-bottom: 10px;
-    animation: textGlow 2s ease-in-out infinite alternate; /* Reusing previous animation */
+    animation: textGlow 2s ease-in-out infinite alternate;
 }
 
 .home-header h2 {
@@ -518,9 +382,8 @@ hr {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* Main Home Content Area */
 .home-main {
-    flex-grow: 1; /* Makes it take up available vertical space */
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -531,13 +394,13 @@ hr {
 
 .central-display {
     text-align: center;
-    background-color: rgba(10, 10, 20, 0.85); /* Similar to mission core */
+    background-color: rgba(10, 10, 20, 0.85);
     border: 2px solid var(--accent-color-blue);
     border-radius: 20px;
     padding: 50px;
     max-width: 700px;
     box-shadow: 0 0 40px var(--accent-color-blue), 0 0 80px rgba(0, 240, 240, 0.5);
-    animation: centralPulse 3s ease-in-out infinite alternate; /* New pulse for this element */
+    animation: centralPulse 3s ease-in-out infinite alternate;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -552,7 +415,7 @@ hr {
 }
 
 .avengers-logo {
-    width: 200px; /* Adjust size as needed */
+    width: 200px;
     height: auto;
     margin-bottom: 30px;
     filter: drop-shadow(0 0 15px var(--accent-color-blue)) brightness(1.2);
@@ -565,55 +428,12 @@ hr {
     100% { filter: drop-shadow(0 0 15px var(--accent-color-blue)) brightness(1.2); }
 }
 
-
 .central-display p {
     font-size: 1.2em;
     margin-bottom: 40px;
     color: #c0c0c0;
 }
 
-/* --- THE MISSION LINK BUTTON STYLE --- */
-.mission-link-button {
-    /* Inherit button styling from activate-button for consistency */
-    background: linear-gradient(45deg, var(--accent-color-red), #ff6600); /* Use a different color for Home button */
-    color: white;
-    padding: 18px 40px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.3em;
-    font-family: 'Audiowide', cursive;
-    cursor: pointer;
-    box-shadow: 0 0 15px var(--accent-color-red);
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    text-decoration: none; /* Remove underline from link */
-    display: inline-block; /* Make it behave like a block element for padding/margin */
-    position: relative;
-    overflow: hidden;
-}
-
-.mission-link-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: skewX(-30deg);
-    transition: all 0.4s ease;
-}
-
-.mission-link-button:hover::before {
-    left: 100%;
-}
-
-.mission-link-button:hover {
-    box-shadow: 0 0 25px var(--accent-color-red), 0 0 40px rgba(255, 51, 0, 0.7);
-    transform: scale(1.05);
-}
-
-/* Footer (can be reused from previous styles if you have one) */
 .home-footer {
     text-align: center;
     padding: 20px;
@@ -623,44 +443,24 @@ hr {
     z-index: 2;
 }
 
-/* Responsive adjustments for home page */
-@media (max-width: 768px) {
-    .home-header h1 {
-        font-size: 3em;
-    }
-    .home-header h2 {
-        font-size: 1.5em;
-    }
-    .central-display {
-        padding: 30px;
-    }
-    .avengers-logo {
-        width: 150px;
-    }
-    .central-display p {
-        font-size: 1em;
-    }
-    .mission-link-button {
-        padding: 15px 30px;
-        font-size: 1.1em;
-    }
-}
 
-@media (max-width: 480px) {
-    .home-header h1 {
-        font-size: 2em;
+/* --- Responsive Design --- */
+@media screen and (max-width: 768px) {
+    .intro, .gallery, .quotes, .footer, .central-display {
+        width: 90%;
+        padding: 15px;
     }
-    .home-header h2 {
-        font-size: 1em;
-    }
-    .central-display {
+
+    header {
+        font-size: 20px;
         padding: 20px;
     }
-    .avengers-logo {
-        width: 100px;
+
+    img {
+        height: auto;
     }
-    .mission-link-button {
-        padding: 12px 25px;
-        font-size: 1em;
+
+    h1, h2, h3 {
+        font-size: 90%;
     }
 }
